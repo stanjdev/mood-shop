@@ -24,23 +24,23 @@ const itemsContainer = document.querySelector('#items');
 // };
 
 // ES6 forEach()
-data.forEach(entry => {
+data.forEach(mood => {
   const newDiv = document.createElement('div');
   newDiv.className = 'item';
   const img = document.createElement('img');
-  img.src = entry.image;
+  img.src = mood.image;
   img.width = 300;
   img.height = 300;
   const desc = document.createElement('p');
-  desc.innerText = entry.desc;
+  desc.innerText = mood.desc;
   const name = document.createElement('p');
-  name.innerText = entry.name;
+  name.innerText = mood.name;
   const price = document.createElement('p');
   const button = document.createElement('button');
-  button.id = entry.name;
-  button.dataset.price = entry.price;
+  button.id = mood.name;
+  button.dataset.price = mood.price;
   button.innerHTML = "Add to Cart"
-  price.innerText = entry.price;
+  price.innerText = mood.price;
   newDiv.appendChild(img);
   // newDiv.appendChild(name);
   newDiv.appendChild(desc);
