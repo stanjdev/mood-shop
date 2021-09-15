@@ -24,3 +24,35 @@ body {
   padding: 0.5em;
   text-decoration: none;
 }
+
+.items {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+}
+
+.items img {
+  width: 100%;
+  height: auto;
+}
+
+.items p:nth-child(3) {
+  font-weight: bold;
+}
+
+.items button {
+  padding: 7px;
+  border-radius: 10px;
+  background-color: teal;
+  color: rgba(168, 255, 80, 0.762);
+  align-self: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* border: solid 1px; */
+}

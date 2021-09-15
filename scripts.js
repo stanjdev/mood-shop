@@ -40,7 +40,7 @@ data.forEach(mood => {
   button.id = mood.name;
   button.dataset.price = mood.price;
   button.innerHTML = "Add to Cart"
-  price.innerText = mood.price;
+  price.innerText = "$" + mood.price;
   newDiv.appendChild(img);
   // newDiv.appendChild(name);
   newDiv.appendChild(desc);
