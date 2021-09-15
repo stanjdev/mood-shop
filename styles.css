@@ -10,6 +10,11 @@ body {
   flex-direction: row;
   justify-content: space-between;
   background-color: #c6ffc4;
+  padding: 0 30px 0 30px;
+}
+
+.page-header h4 {
+  font-size: 1.1em;
 }
 
 .page-header ul {
@@ -26,6 +31,7 @@ body {
 }
 
 .items {
+  padding: 40px;
   width: 80%;
   margin: auto;
   display: grid;
@@ -36,6 +42,7 @@ body {
 .items img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 
 .items p:nth-child(3) {
@@ -53,6 +60,8 @@ body {
 .item {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* border: solid 1px; */
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border: solid 1px;
+  border-radius: 5px;
 }

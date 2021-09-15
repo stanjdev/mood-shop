@@ -31,6 +31,7 @@ data.forEach(mood => {
   img.src = mood.image;
   img.width = 300;
   img.height = 300;
+  img.title = mood.name;
   const desc = document.createElement('p');
   desc.innerText = mood.desc;
   const name = document.createElement('p');
