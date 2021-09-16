@@ -79,10 +79,9 @@ function addItem(mood, price) {
     'price': price,
     'quantity': 1
   }
-
-  console.log(shoppingCart);
+  showItems();
 };
 
 function showItems() {
-
+  console.log(shoppingCart)
 };
