@@ -41,6 +41,11 @@ data.forEach(mood => {
   button.id = mood.name;
   button.dataset.price = mood.price;
   button.innerHTML = "Add to Cart"
+  button.addEventListener("click", (e) => {
+    const mood = e.target.id;
+    const price = Number(e.target.dataset.price);
+    addItem(mood, price);
+  })
   price.innerText = "$" + mood.price;
   newDiv.appendChild(img);
   // newDiv.appendChild(name);
@@ -50,3 +55,34 @@ data.forEach(mood => {
   console.log(img);
   itemsContainer.appendChild(newDiv);
 });
+
+/* 
+{
+  'happy': {
+    price: 5.99,
+    quantity: 2,
+  }
+}
+shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[mood] = {
+  'price': price,
+  'quantity': 1
+}
+*/
+const shoppingCart = {};
+let totalPrice = 0;
+
+function addItem(mood, price) {
+  totalPrice += price;
+  console.log(totalPrice);
+
+  shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[mood] = {
+    'price': price,
+    'quantity': 1
+  }
+
+  console.log(shoppingCart);
+};
+
+function showItems() {
+
+};
