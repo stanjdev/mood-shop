@@ -69,19 +69,37 @@ shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[
 }
 */
 const shoppingCart = {};
-let totalPrice = 0;
 
 function addItem(mood, price) {
-  totalPrice += price;
-  console.log(totalPrice);
-
   shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[mood] = {
-    'price': price,
+    price,
     'quantity': 1
   }
   showItems();
 };
 
+function getQty(items) {
+  let totalQuantity = 0;
+  items.forEach(item => {
+    totalQuantity += item[1].quantity;
+  })
+  return totalQuantity;
+};
+
+function getTotal(items) {
+  let totalPrice = 0;
+  items.forEach(item => {
+    totalPrice += Number((item[1].price * item[1].quantity).toFixed(2));
+  })
+  return totalPrice.toFixed(2);
+}
+
 function showItems() {
-  console.log(shoppingCart)
+  const items = Object.entries(shoppingCart);
+  console.log(`Total items in your cart: ${getQty(items)}`);
+  items.forEach(item => {
+    let priceOfItem = (item[1].price * item[1].quantity).toFixed(2);
+    console.log(`${item[0]} $${item[1].price} x${item[1].quantity} = $${priceOfItem}`)
+  });
+  console.log(`Total price: $${getTotal(items)}`);
 };
