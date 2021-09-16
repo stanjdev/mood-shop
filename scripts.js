@@ -81,13 +81,6 @@ function addItem(mood, price) {
   }, 1000);
 };
 
-function decrementQty(mood) {
-  // if quantity is 0, remove the mood entirely from the object
-  if (shoppingCart[mood].quantity < 1) removeItem(mood);
-  shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity-- : null;
-  console.log(shoppingCart);
-};
-
 function removeItem(mood, qty = 0) {
   if (shoppingCart[mood] !== undefined) {
     if (shoppingCart[mood].quantity > 0) shoppingCart[mood].quantity--;
