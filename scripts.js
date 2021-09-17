@@ -1,6 +1,9 @@
 import data from './data.js';
 
 const itemsContainer = document.querySelector('#items');
+const itemList = document.getElementById('item-list');
+const qtyDisplay = document.getElementById('cart-qty');
+const totalDisplay = document.getElementById('cart-total');
 
 // for (let i = 0; i < data.length; i++) {
 //   const newDiv = document.createElement('div');
@@ -76,9 +79,9 @@ function addItem(mood, price) {
     'quantity': 1
   }
   showItems();
-  setTimeout(() => {
-    removeItem(mood);
-  }, 1000);
+  // setTimeout(() => {
+  //   removeItem(mood);
+  // }, 1000);
 };
 
 function removeItem(mood, qty = 0) {
@@ -108,10 +111,15 @@ function getTotal(items) {
 
 function showItems() {
   const items = Object.entries(shoppingCart);
-  console.log(`Total items in your cart: ${getQty(items)}`);
+  qtyDisplay.innerHTML = `Total items in your cart: ${getQty(items)}`;
+
+  let itemStr = "";
   items.forEach(item => {
-    let priceOfItem = (item[1].price * item[1].quantity).toFixed(2);
-    console.log(`${item[0]} $${item[1].price} x${item[1].quantity} = $${priceOfItem}`)
+    const { price, quantity } = item[1];
+    let priceOfItem = (price * quantity).toFixed(2);
+    itemStr += `<li>${item[0]} $${price} x${quantity} = $${priceOfItem}</li>`;
   });
-  console.log(`Total price: $${getTotal(items)}`);
+  itemList.innerHTML = itemStr;
+  
+  totalDisplay.innerHTML = `Total price: $${getTotal(items)}`;
 };
