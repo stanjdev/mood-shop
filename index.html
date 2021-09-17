@@ -9,24 +9,28 @@
 </head>
 <body>
   <header class="page-header">
-    <h4>The Mood Shop</h4>
+    <h4>Mood Shop</h4>
     <nav>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a href="#items">Shop</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#shopping-cart">Cart</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="items" id="items"></main>
 
+  <div class="shopping-bag-container">
+    <img src="/images/Daco_1248617.png" alt="shopping bag" height="50" >
+  </div>
+
   <footer>
+    <h2 id="shopping-cart"></h2>
     <div id="cart-qty"></div>
-    
     <ul id="item-list"></ul>
-    
     <div id="cart-total"></div>
+    <div id="checkout"></div>
   </footer>
 
   <script src="scripts.js" type="module"></script>

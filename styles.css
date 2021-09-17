@@ -1,8 +1,13 @@
+html {
+  color: whitesmoke;
+}
+
 body {
   font-family: Helvetica;
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
+  background-image: linear-gradient(to bottom, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
 }
 
 .page-header {
@@ -11,10 +16,28 @@ body {
   justify-content: space-between;
   background-color: #c6ffc4;
   padding: 0 30px 0 30px;
+  height: 100vh;
+  background-image: url("https://i.ytimg.com/vi/kl1axH-jMy4/maxresdefault.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
 }
 
-.page-header h4 {
+.about-page {
+  padding: 0 30px 0 30px;
+  height: 100vh;
+  color: whitesmoke;
+}
+
+.about-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.page-header h4, .about-header h4 { 
   font-size: 1.1em;
+  color: whitesmoke;
 }
 
 .page-header ul {
@@ -24,10 +47,11 @@ body {
   list-style: none;
 }
 
-.page-header a {
+.page-header a, .about-header a{
   display: block;
   padding: 0.5em;
   text-decoration: none;
+  color: whitesmoke;
 }
 
 .items {
@@ -45,23 +69,82 @@ body {
   border-radius: 5px;
 }
 
-.items p:nth-child(3) {
-  font-weight: bold;
+input {
+  padding: 7px;
+}
+
+button {
+  padding: 7px 11px 7px 11px;
+  background-color: royalblue;
+  color: whitesmoke;
 }
 
 .items button {
-  padding: 7px;
-  border-radius: 10px;
-  background-color: teal;
-  color: rgba(168, 255, 80, 0.762);
-  align-self: center;
+  /* border-radius: 10px; */
+  color: whitesmoke;
+  /* align-self: center; */
 }
 
 .item {
   display: flex;
   flex-direction: column;
+  padding: 0 6px 20px 6px;
+  /* padding-bottom: 20px; */
+}
+
+.picture-frame {
+  /* border: solid 1px black; */
+  height: 225px;
+  display: flex;
+  justify-content: center;
+}
+
+.text-frame {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 20px;
-  border: solid 1px;
-  border-radius: 5px;
+  /* border: solid orange 1px; */
+  padding: 10px 0 0 0;
+  height: 130px;
+}
+
+.button-holder {
+  /* border: pink solid 1px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 10px 0 10px; */
+}
+
+.button-holder span:nth-child(1) {
+  font-weight: bold;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+}
+
+.item-line-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: 1px solid; */
+  width: 225px;
+}
+
+.shopping-bag-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+footer {
+  /* border: 1px solid; */
+  padding: 0 20px 30px 20px;
+  width: 50%;
+  margin: 0 auto;
 }

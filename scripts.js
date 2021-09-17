@@ -4,43 +4,29 @@ const itemsContainer = document.querySelector('#items');
 const itemList = document.getElementById('item-list');
 const qtyDisplay = document.getElementById('cart-qty');
 const totalDisplay = document.getElementById('cart-total');
-
-
-// for (let i = 0; i < data.length; i++) {
-//   const newDiv = document.createElement('div');
-//   newDiv.className = 'item';
-//   const img = document.createElement('img');
-//   img.src = data[i].image;
-//   img.width = 300;
-//   img.height = 300;
-//   const desc = document.createElement('p');
-//   desc.innerText = data[i].desc;
-//   const name = document.createElement('p');
-//   name.innerText = data[i].name;
-//   const price = document.createElement('p');
-//   price.innerText = data[i].price;
-//   newDiv.appendChild(img);
-//   // newDiv.appendChild(name);
-//   newDiv.appendChild(desc);
-//   newDiv.appendChild(price);
-//   console.log(img);
-//   itemsContainer.appendChild(newDiv);
-// };
+const shoppingCartTitle = document.getElementById('shopping-cart');
+const checkoutBtnContainer = document.getElementById('checkout');
+const checkoutBtn = document.createElement('button');
 
 // ES6 forEach()
 data.forEach(mood => {
   const newDiv = document.createElement('div');
   newDiv.className = 'item';
   const img = document.createElement('img');
+  const frame = document.createElement('div');
+  frame.className = "picture-frame";
+  const textFrame = document.createElement('div');
+  textFrame.className = "text-frame";
+  const buttonHolder = document.createElement('div');
+  buttonHolder.className = "button-holder";
   img.src = mood.image;
   img.width = 300;
   img.height = 300;
   img.title = mood.name;
-  const desc = document.createElement('p');
+  const desc = document.createElement('span');
   desc.innerText = mood.desc;
-  const name = document.createElement('p');
-  name.innerText = mood.name;
-  const price = document.createElement('p');
+  const price = document.createElement('span');
+  // Add to cart buttons and logic:
   const button = document.createElement('button');
   button.id = mood.name;
   button.dataset.price = mood.price;
@@ -51,15 +37,18 @@ data.forEach(mood => {
     addItem(mood, price);
   })
   price.innerText = "$" + mood.price;
-  newDiv.appendChild(img);
-  newDiv.appendChild(desc);
-  newDiv.appendChild(price);
-  newDiv.appendChild(button);
+  frame.appendChild(img);
+  textFrame.appendChild(desc);
+  buttonHolder.append(price);
+  buttonHolder.append(button);
+  newDiv.appendChild(frame);
+  newDiv.appendChild(textFrame);
+  newDiv.appendChild(buttonHolder);
   console.log(img);
   itemsContainer.appendChild(newDiv);
 });
 
-/* Alternative way to access buttons AFTER they're created: */
+/* Alternative way to access add to cart buttons AFTER they're created: */
 // const all_items_button = Array.from(document.querySelectorAll('button'));
 // console.log(all_items_button);
 // all_items_button.forEach(element => {
@@ -68,8 +57,9 @@ data.forEach(mood => {
 //   })
 // });
 
-/* 
-Data in object looks like this:
+
+const shoppingCart = {};
+/* Data in my object looks like this example:
 {
   'happy': {
     price: 5.99,
@@ -77,17 +67,13 @@ Data in object looks like this:
   }
 }
 */
-const shoppingCart = {};
 
 function addItem(mood, price) {
   shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[mood] = {
     price,
     'quantity': 1
   }
-  showItems();
-  // setTimeout(() => {
-  //   removeItem(mood);
-  // }, 1000);
+  return showItems();
 };
 
 function removeItem(mood, qty = 0) {
@@ -95,8 +81,29 @@ function removeItem(mood, qty = 0) {
     if (shoppingCart[mood].quantity > 0) shoppingCart[mood].quantity--;
     if (shoppingCart[mood].quantity < 1 || qty == 0) delete shoppingCart[mood] // delete keyword when working with Objects
   }
-  console.log(shoppingCart);
+  return showItems(); // to refresh the list after removing an item
   // for an array, use splice(i, 1) to remove specific
+};
+
+function updateCart(mood, qty) {
+  if (qty < 1) removeItem(mood);
+  else shoppingCart[mood].quantity = qty;
+  return showItems();
+};
+
+itemList.onclick = function(e) {
+  const name = e.target.dataset.name;
+  if (e.target && e.target.classList.contains('remove')) removeItem(name);
+  else if (e.target && e.target.classList.contains('increment')) addItem(name);
+  else if (e.target && e.target.classList.contains('decrement')) removeItem(name, 1);
+};
+
+itemList.onchange = function(e) {
+  if (e.target && e.target.classList.contains('update')) {
+    const name = e.target.dataset.name;
+    const qty = parseInt(e.target.value);
+    updateCart(name, qty);
+  }
 };
 
 function getQty(items) {
@@ -117,15 +124,34 @@ function getTotal(items) {
 
 function showItems() {
   const items = Object.entries(shoppingCart);
+  shoppingCartTitle.innerHTML = "Shopping Cart";
+  shoppingCartTitle.style.textAlign = "center";
   qtyDisplay.innerHTML = `Total items in your cart: ${getQty(items)}`;
 
   let itemStr = "";
   items.forEach(item => {
+    const name = item[0];
     const { price, quantity } = item[1];
     let priceOfItem = (price * quantity).toFixed(2);
-    itemStr += `<li>${item[0]} $${price} x${quantity} = $${priceOfItem}</li>`;
+    itemStr += `<li>
+      <div class="item-line-text">
+        <span>${name}</span> 
+        <span>$${price} x ${quantity} = $${priceOfItem} </span>
+      </div>
+      <div>
+        <button class="remove" data-name=${name}>Remove</button>
+        <button class="increment" data-name=${name}> + </button>
+        <button class="decrement" data-name=${name}> - </button>
+        <input class="update" type="number" data-name=${name} placeholder="Enter quantity:" min="0">
+      </div>
+    </li>`;
   });
   itemList.innerHTML = itemStr;
 
   totalDisplay.innerHTML = `Total price: $${getTotal(items)}`;
+  totalDisplay.style.fontWeight = "bold";
+
+  checkoutBtn.innerHTML = "Checkout";
+  checkoutBtn.style.fontWeight = "bold";
+  checkoutBtnContainer.appendChild(checkoutBtn);
 };
