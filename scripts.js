@@ -5,6 +5,7 @@ const itemList = document.getElementById('item-list');
 const qtyDisplay = document.getElementById('cart-qty');
 const totalDisplay = document.getElementById('cart-total');
 
+
 // for (let i = 0; i < data.length; i++) {
 //   const newDiv = document.createElement('div');
 //   newDiv.className = 'item';
@@ -51,7 +52,6 @@ data.forEach(mood => {
   })
   price.innerText = "$" + mood.price;
   newDiv.appendChild(img);
-  // newDiv.appendChild(name);
   newDiv.appendChild(desc);
   newDiv.appendChild(price);
   newDiv.appendChild(button);
@@ -59,16 +59,22 @@ data.forEach(mood => {
   itemsContainer.appendChild(newDiv);
 });
 
+/* Alternative way to access buttons AFTER they're created: */
+// const all_items_button = Array.from(document.querySelectorAll('button'));
+// console.log(all_items_button);
+// all_items_button.forEach(element => {
+//   element.addEventListener('click', () => {
+//     console.log(element.getAttribute('id'), element.getAttribute('data-price'))
+//   })
+// });
+
 /* 
+Data in object looks like this:
 {
   'happy': {
     price: 5.99,
     quantity: 2,
   }
-}
-shoppingCart[mood] !== undefined ? shoppingCart[mood].quantity++ : shoppingCart[mood] = {
-  'price': price,
-  'quantity': 1
 }
 */
 const shoppingCart = {};
@@ -120,6 +126,6 @@ function showItems() {
     itemStr += `<li>${item[0]} $${price} x${quantity} = $${priceOfItem}</li>`;
   });
   itemList.innerHTML = itemStr;
-  
+
   totalDisplay.innerHTML = `Total price: $${getTotal(items)}`;
 };
